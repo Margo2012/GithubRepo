@@ -16,12 +16,13 @@ class SearchViewModel(private val repository: RepositoryImpl) : ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
 
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> get() = _error
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> get() = _error
 
     fun searchRepositories(query: String, page: Int) {
         viewModelScope.launch {
             _loading.value = true
+            _error.value = null
             val result = repository.searchRepositories(query, page)
             if (result != null) {
                 _repositories.value = result

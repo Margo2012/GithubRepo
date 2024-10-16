@@ -14,3 +14,13 @@ class SearchViewModelFactory(private val repository: RepositoryImpl) : ViewModel
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
+class DetailViewModelFactory(private val repository: RepositoryImpl): ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return DetailViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}
