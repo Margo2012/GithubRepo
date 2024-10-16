@@ -1,6 +1,7 @@
 package com.example.githubrepo.view
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -32,6 +33,8 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         repoNameTextView = findViewById(R.id.repoName)
         repoDescriptionTextView = findViewById(R.id.repoDescription)
         issuesRecyclerView = findViewById(R.id.issuesRecyclerView)
@@ -45,6 +48,16 @@ class DetailActivity : AppCompatActivity() {
         val repoName = intent.getStringExtra("REPO_NAME") ?: ""
         val repoOwner = intent.getStringExtra("REPO_OWNER") ?: ""
         viewModel.getIssues(repoOwner, repoName)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> { // Handle the back button click
+                onBackPressed() // Call onBackPressed to navigate back
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun setupUI() {
