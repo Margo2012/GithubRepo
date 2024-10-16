@@ -1,7 +1,7 @@
 package com.example.githubrepo.network
 
-import com.example.githubrepo.data.Issue
-import com.example.githubrepo.data.Repository
+import com.example.githubrepo.data.model.Issue
+import com.example.githubrepo.data.model.Repository
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
